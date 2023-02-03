@@ -1,3 +1,10 @@
+<script>
+    import { Link } from "@inertiajs/vue3"
+    export default {
+        components: { Link }
+    }
+</script>
+
 <template>
     <nav class="mb-6">
         <ul class="list-disc">
@@ -9,9 +16,3 @@
     </nav>   
 </template>
 
-<script>
-    import { Link } from "@inertiajs/vue3"
-    export default {
-        components: { Link }
-    }
-</script>
