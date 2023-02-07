@@ -6,8 +6,8 @@
 </script>
 
 <template>
-    <nav class="mb-6">
-        <ul class="list-disc">
+    <nav>
+        <ul class="list-disc flex space-x-4 list-inside">
             <li>
                 <NavLink href="/" :active="$page.component == 'Home'">
                     Home
