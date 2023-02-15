@@ -1,5 +1,5 @@
 import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createInertiaApp, Head } from '@inertiajs/vue3'
 import Layout from "./Shared/Layout.vue"
 
 createInertiaApp({
@@ -12,6 +12,7 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
+      .component("Head", Head)
       .mount(el)
   },
   progress: {
@@ -20,4 +21,5 @@ createInertiaApp({
     includeCSS: true,
     showSpinner: true,
   },
+  title: title => 'My App | ' + title
 })
