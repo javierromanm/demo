@@ -1,7 +1,6 @@
 <script setup>
-    import { Link } from "@inertiajs/vue3"    
     defineProps({
-            time: String
+            users: Array
     })
 </script>
 
@@ -10,7 +9,8 @@
         <title>Users</title>
     </Head>
     <h1 class="text-4xl">Users</h1>   
-    <p style="margin-top: 700px;">The current time is {{ time }}</p> 
-    <Link href="/users" class="text-blue-500" preserve-scroll>Refresh</Link>
+    <ul>
+        <li v-for="user in users" :key="user.id" v-text="user.name" />
+    </ul>    
 </template>
 
