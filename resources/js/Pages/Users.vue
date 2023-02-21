@@ -1,8 +1,18 @@
 <script setup>
     import { Link } from "@inertiajs/vue3"
     import Pagination from "../Shared/Pagination.vue"
-    defineProps({
-            users: Object
+    import { ref, watch } from "vue"
+    import { router } from '@inertiajs/vue3'
+    let props = defineProps({
+            users: Object,
+            filters: Object
+    })
+    let search = ref(props.filters.search)
+    watch(search, value => {
+        router.get('/users', {search: value}, {
+            preserveState: true,
+            replace: true
+        })
     })
 </script>
 
@@ -10,7 +20,11 @@
     <Head>
         <title>Users</title>
     </Head>
-    <h1 class="text-4xl">Users</h1>   
+    <div class="flex justify-between mb-6">
+        <h1 class="text-4xl">Users</h1>   
+        <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg">
+    </div>
+
     
     <div v-for="user in users.data" :key="user.id" class="lg:flex lg:items-center lg:justify-between mt-4 shadow-md p-4 mb-1">
         <div class="min-w-0 flex-1">
