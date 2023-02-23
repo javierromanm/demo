@@ -9,6 +9,9 @@
     let submit = () => {
         router.post('/users', form)
     }
+    defineProps({
+        errors: Object
+    })
 </script>
 
 <template>
@@ -27,6 +30,7 @@
                     id="name"
                     required
             >
+            <div v-if="errors.name" v-text="errors.name" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="email">
@@ -38,6 +42,7 @@
                     id="email"
                     required
             >
+            <div v-if="errors.email" v-text="errors.email" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="password">
@@ -49,6 +54,7 @@
                     id="password"
                     required
             >
+            <div v-if="errors.password" v-text="errors.password" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
             <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
