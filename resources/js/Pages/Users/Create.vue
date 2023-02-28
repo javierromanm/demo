@@ -1,17 +1,13 @@
 <script setup>
-    import {reactive} from "vue";
-    import { router } from '@inertiajs/vue3'
-    let form = reactive({
+    import { useForm } from '@inertiajs/vue3'
+    let form = useForm({
         name: '',
         email: '',
         password: ''
-    })    
-    let submit = () => {
-        router.post('/users', form)
+    }) 
+    let submit = () => {        
+        form.post('/users')
     }
-    defineProps({
-        errors: Object
-    })
 </script>
 
 <template>
@@ -19,7 +15,7 @@
         <title>Create User</title>
     </Head>    
     <h1 class="text-4xl">Create User</h1> 
-    <form @click.prevent="submit" class="max-w-md mx-auto mt-8">
+    <form @submit.prevent="submit" class="max-w-md mx-auto mt-8">
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="name">
                 Name
@@ -30,7 +26,7 @@
                     id="name"
                     required
             >
-            <div v-if="errors.name" v-text="errors.name" class="text-red-500 text-xm"></div>
+            <div v-if="form.errors.name" v-text="form.errors.name" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="email">
@@ -42,7 +38,7 @@
                     id="email"
                     required
             >
-            <div v-if="errors.email" v-text="errors.email" class="text-red-500 text-xm"></div>
+            <div v-if="form.errors.email" v-text="form.errors.email" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="password">
@@ -52,12 +48,11 @@
                     type="password"
                     name="password"
                     id="password"
-                    required
             >
-            <div v-if="errors.password" v-text="errors.password" class="text-red-500 text-xm"></div>
+            <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xm"></div>
         </div>
         <div class="mb-6">
-            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
+            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" :disabled="form.processing">
                 Submit
             </button>
         </div>
