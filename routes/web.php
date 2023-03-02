@@ -18,7 +18,7 @@ Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-
+Route::middleware('auth')->group(function() {
 
     Route::get('/', function () {
         return inertia('Home', [
@@ -59,4 +59,4 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
     Route::get('/settings', function () {
         return inertia('Settings');
     });
-
+});
