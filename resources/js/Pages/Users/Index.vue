@@ -6,7 +6,8 @@
     import throttle from 'lodash/throttle'
     let props = defineProps({
             users: Object,
-            filters: Object
+            filters: Object,
+            can: Object
     })
     let search = ref(props.filters.search)
     watch(search, throttle(function(value) {
@@ -24,7 +25,7 @@
     <div class="flex justify-between mb-6">
         <div class="flex items-center">
             <h1 class="text-4xl">Users</h1>   
-            <Link href="/users/create" class="text-blue-500 text-sm ml-3">New User</Link>
+            <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm ml-3">New User</Link>
         </div>
         <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg">
     </div>
@@ -36,7 +37,7 @@
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
             <span class="hidden sm:block"> 
-            <Link :href="'/users/' + user.id + '/edit'" type="button" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <Link v-if="user.can.edit" :href="'/users/' + user.id + '/edit'" type="button" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
                 </svg>
